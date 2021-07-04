@@ -347,3 +347,7 @@ data class PersonaCampana(  @Id
         return id_persona_campana.hashCode()
     }
 }
+
+data class Message(var id:String,var message:String){
+
+}

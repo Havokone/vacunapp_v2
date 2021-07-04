@@ -28,3 +28,7 @@ class CampanaNotificacionController(campanaNotificacionService: CampanaNotificac
 @RestController
 @RequestMapping("/api/aplicacion_vacuna")//persona_campana
 class PersonaCampanaController(personaCampanaService: PersonaCampanaService):BasicController<PersonaCampana,String>(personaCampanaService)
+
+@RestController
+@RequestMapping("/api/comunication")//
+class ComunicationController(comunicationService: ComunicationService):BasicController<Message,String>(comunicationService)
