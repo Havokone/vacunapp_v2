@@ -34,13 +34,13 @@ data class Vacuna(  @Id
                     var qt_dias:Int = 0,
 
                     @Column(name = "s_usu_crea")
-                    var s_usu_crea:String=Constantes.S_EMPTY,
+                    var s_usu_crea:String? = null,
 
                     @Column(name = "d_fec_crea")
                     var d_fec_crea:Date? = null,
 
                     @Column(name = "s_usu_mod")
-                    var s_usu_mod:String=Constantes.S_EMPTY,
+                    var s_usu_mod:String? = null,
 
                     @Column(name = "d_fec_mod")
                     var d_fec_mod: Date? = null ){
@@ -94,13 +94,13 @@ data class LocalVacunacion( @Id
                             var s_ubigeo_dis:String = Constantes.S_EMPTY,
 
                             @Column(name = "s_usu_crea")
-                            var s_usu_crea:String=Constantes.S_EMPTY,
+                            var s_usu_crea:String? = null,
 
                             @Column(name = "d_fec_crea")
                             var d_fec_crea:Date? = null,
 
                             @Column(name = "s_usu_mod")
-                            var s_usu_mod:String=Constantes.S_EMPTY,
+                            var s_usu_mod:String? = null,
 
                             @Column(name = "d_fec_mod")
                             var d_fec_mod: Date? = null ){
@@ -160,13 +160,13 @@ data class Persona( @Id
                     var s_ubigeo_dis:String? = Constantes.S_EMPTY,
 
                     @Column(name = "s_usu_crea")
-                    var s_usu_crea:String=Constantes.S_EMPTY,
+                    var s_usu_crea:String? = null,
 
                     @Column(name = "d_fec_crea")
                     var d_fec_crea:Date? = null,
 
                     @Column(name = "s_usu_mod")
-                    var s_usu_mod:String=Constantes.S_EMPTY,
+                    var s_usu_mod:String? = null,
 
                     @Column(name = "d_fec_mod")
                     var d_fec_mod: Date? = null ){
@@ -217,13 +217,13 @@ data class Campana( @Id
                     var b_envio_notificacion:Boolean = false,
 
                     @Column(name = "s_usu_crea")
-                    var s_usu_crea:String=Constantes.S_EMPTY,
+                    var s_usu_crea:String? = null,
 
                     @Column(name = "d_fec_crea")
                     var d_fec_crea:Date? = null,
 
                     @Column(name = "s_usu_mod")
-                    var s_usu_mod:String=Constantes.S_EMPTY,
+                    var s_usu_mod:String? = null,
 
                     @Column(name = "d_fec_mod")
                     var d_fec_mod: Date? = null ){
@@ -265,13 +265,13 @@ data class CampanaNotificacion( @Id
                                 var i_sesion:Int = 0,
 
                                 @Column(name = "s_usu_crea")
-                                var s_usu_crea:String=Constantes.S_EMPTY,
+                                var s_usu_crea:String? = null,
 
                                 @Column(name = "d_fec_crea")
                                 var d_fec_crea:Date? = null,
 
                                 @Column(name = "s_usu_mod")
-                                var s_usu_mod:String=Constantes.S_EMPTY,
+                                var s_usu_mod:String? = null,
 
                                 @Column(name = "d_fec_mod")
                                 var d_fec_mod: Date? = null ){
@@ -322,13 +322,13 @@ data class PersonaCampana(  @Id
                             var b_completo:Boolean = false,
 
                             @Column(name = "s_usu_crea")
-                            var s_usu_crea:String=Constantes.S_EMPTY,
+                            var s_usu_crea:String? = null,
 
                             @Column(name = "d_fec_crea")
                             var d_fec_crea:Date? = null,
 
                             @Column(name = "s_usu_mod")
-                            var s_usu_mod:String=Constantes.S_EMPTY,
+                            var s_usu_mod:String? = null,
 
                             @Column(name = "d_fec_mod")
                             var d_fec_mod: Date? = null ){
@@ -348,6 +348,57 @@ data class PersonaCampana(  @Id
     }
 }
 
-data class Message(var id:String,var message:String){
+@Entity
+@Table(name="usuario")
+data class Usuario(  @Id
+                     @get:Size(min=0, max=30)
+                     @Column(name = "s_email")
+                     var s_email:String = Constantes.S_EMPTY,
 
+                     @get:Size(min=0, max=50)
+                     @Column(name = "s_nombres")
+                     var s_nombres:String = Constantes.S_EMPTY,
+
+                     @get:Size(min=0, max=50)
+                     @Column(name = "s_apellidos")
+                     var s_apellidos:String = Constantes.S_EMPTY,
+
+                     @get:Size(min=0, max=30)
+                     @Column(name = "s_rol")
+                     var s_rol:String = Constantes.S_EMPTY,
+
+                     @get:Size(min=1, max=100)
+                     @Column(name = "s_password")
+                     var s_password:String=Constantes.S_EMPTY,
+
+                     @Column(name = "b_habilitado")
+                     var b_habilitado:Boolean = false,
+
+                     @Column(name = "s_usu_crea")
+                     var s_usu_crea:String?=null,
+
+                     @Column(name = "d_fec_crea")
+                     var d_fec_crea:Date? = null,
+
+                     @Column(name = "s_usu_mod")
+                     var s_usu_mod:String?=null,
+
+                     @Column(name = "d_fec_mod")
+                     var d_fec_mod: Date? = null ){
+
+
+    override fun equals(other: Any?): Boolean {
+        other ?: return false
+        if(other === this) return true
+        if (this.javaClass != other.javaClass) return false
+        other as Usuario
+
+        return (this.s_email == other.s_email)
+    }
+
+    override fun hashCode(): Int {
+        return s_email.hashCode()
+    }
 }
+
+data class Ubigeo( var nombre:String,var codigo:String, var tipo:Int)

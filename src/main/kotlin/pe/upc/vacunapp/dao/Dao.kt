@@ -21,3 +21,6 @@ interface CampanaNotificacionDAO: JpaRepository<CampanaNotificacion, Int>
 
 @Repository
 interface PersonaCampanaDAO: JpaRepository<PersonaCampana, String>
+
+@Repository
+interface UsuarioDAO: JpaRepository<Usuario, String>

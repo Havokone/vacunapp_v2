@@ -10,10 +10,12 @@ import javax.validation.Valid
 abstract class BasicController<T,ID>(private val basicCrud: BasicCrud<T, ID>) {
 
     //cada que el controlador reciba una petición http de tipo get va a invocar esta funcion
+    @CrossOrigin
     @ApiOperation("Get all entities")
     @GetMapping
     fun findAll() = basicCrud.findAll()
 
+    @CrossOrigin
     @GetMapping("/{id}")
     fun findById(@PathVariable id:ID):ResponseEntity<T> {
         val entity = basicCrud.findById(id)
@@ -21,12 +23,15 @@ abstract class BasicController<T,ID>(private val basicCrud: BasicCrud<T, ID>) {
                                 body(entity)
     }
 
+    @CrossOrigin
     @PostMapping
     fun save(@Valid @RequestBody body: T) = ResponseEntity.status(HttpStatus.CREATED).body(this.basicCrud.save(body))
 
+    @CrossOrigin
     @PutMapping
     fun update(@Valid @RequestBody body: T) = this.basicCrud.update(body)
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id:ID) = this.basicCrud.deleteById(id)
 }
