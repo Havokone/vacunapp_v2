@@ -57,7 +57,8 @@ class PersonaCampanaService(private val personaCampanaDAO: PersonaCampanaDAO,
                     if( notExistsVacunacionPreviaThisVacuna ){
                         t.i_sesion = 1
                         t.d_fecha_hora.hours = 0
-                        t.id_persona_campana = StringBuilder("").append((thisCampana!!.id_vacuna).toString()).append("-").append(t.i_sesion.toString()).append("-").append(t.s_dni).toString()
+                        t.id_persona_campana = StringBuilder("").append((thisCampana!!.id_vacuna).toString()).append("-").
+                                                                    append(t.i_sesion.toString()).append("-").append(t.s_dni).toString()
                         return this.personaCampanaDAO.save(t)
                     }
                     //ya tiene dosis previas
@@ -74,7 +75,8 @@ class PersonaCampanaService(private val personaCampanaDAO: PersonaCampanaDAO,
                         if( t.d_fecha_hora.after(proxLimFecha) || t.d_fecha_hora.equals(proxLimFecha) ){
                             t.i_sesion = ultimaVacunacion.i_sesion+1
                             t.d_fecha_hora.hours = 0
-                            t.id_persona_campana = StringBuilder("").append((thisCampana!!.id_vacuna).toString()).append("-").append(t.i_sesion.toString()).append("-").append(t.s_dni).toString()
+                            t.id_persona_campana = StringBuilder("").append((thisCampana!!.id_vacuna).toString()).append("-").
+                                                                        append(t.i_sesion.toString()).append("-").append(t.s_dni).toString()
                             return this.personaCampanaDAO.save(t)
                         }
                         else{
