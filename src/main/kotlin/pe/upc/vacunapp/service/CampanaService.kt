@@ -12,7 +12,9 @@ import javax.persistence.EntityNotFoundException
 
 
 @Service
-class CampanaService(private val campanaDAO: CampanaDAO,private val localVacunacionDAO: LocalVacunacionDAO,private val vacunaDao: VacunaDAO): BasicCrud<Campana,Int> {
+class CampanaService(private val campanaDAO: CampanaDAO,
+                     private val localVacunacionDAO: LocalVacunacionDAO,
+                     private val vacunaDao: VacunaDAO): BasicCrud<Campana,Int> {
 
     override fun findAll(): List<Campana> {
         return this.campanaDAO.findAll()

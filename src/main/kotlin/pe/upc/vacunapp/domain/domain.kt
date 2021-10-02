@@ -78,20 +78,17 @@ data class LocalVacunacion( @Id
                             @Column(name = "s_direccion")
                             var s_direccion:String = Constantes.S_EMPTY,
 
-                            @get:Size(min=2, max=2, message = "el tamaño debe tener 2 caracteres")
-                            @get:NotEmpty
+                            @get:Size(min=0, max=50, message = "el tamaño debe tener 50 caracteres máximo")
                             @Column(name = "s_ubigeo_dep")
-                            var s_ubigeo_dep:String = Constantes.S_EMPTY,
+                            var s_ubigeo_dep:String? = Constantes.S_EMPTY,
 
-                            @get:Size(min=2, max=2, message = "el tamaño debe tener 2 caracteres")
-                            @get:NotEmpty
+                            @get:Size(min=0, max=50, message = "el tamaño debe tener 50 caracteres máximo")
                             @Column(name = "s_ubigeo_pro")
-                            var s_ubigeo_pro:String = Constantes.S_EMPTY,
+                            var s_ubigeo_pro:String? = Constantes.S_EMPTY,
 
-                            @get:Size(min=2, max=2, message = "el tamaño debe tener 2 caracteres")
-                            @get:NotEmpty
+                            @get:Size(min=0, max=50, message = "el tamaño debe tener 50 caracteres máximo")
                             @Column(name = "s_ubigeo_dis")
-                            var s_ubigeo_dis:String = Constantes.S_EMPTY,
+                            var s_ubigeo_dis:String? = Constantes.S_EMPTY,
 
                             @Column(name = "s_usu_crea")
                             var s_usu_crea:String? = null,
@@ -146,16 +143,15 @@ data class Persona( @Id
                     @Column(name = "s_num_celular")
                     var s_num_celular:String = Constantes.S_EMPTY,
 
-                    @get:Size(min=2, max=2, message = "el tamaño debe tener 2 caracteres")
-                    @get:NotEmpty
+                    @get:Size(min=0, max=2, message = "el tamaño debe tener 2 caracteres")
                     @Column(name = "s_ubigeo_dep")
-                    var s_ubigeo_dep:String = Constantes.S_EMPTY,
+                    var s_ubigeo_dep:String? = Constantes.S_EMPTY,
 
-                    @get:Size(min=2, max=2, message = "el tamaño debe tener 2 caracteres")
+                    @get:Size(min=0, max=2, message = "el tamaño debe tener 2 caracteres")
                     @Column(name = "s_ubigeo_pro")
                     var s_ubigeo_pro:String? = Constantes.S_EMPTY,
 
-                    @get:Size(min=2, max=2, message = "el tamaño debe tener 2 caracteres")
+                    @get:Size(min=0, max=2, message = "el tamaño debe tener 2 caracteres")
                     @Column(name = "s_ubigeo_dis")
                     var s_ubigeo_dis:String? = Constantes.S_EMPTY,
 
@@ -180,6 +176,8 @@ data class Persona( @Id
 
         return (this.s_dni == other.s_dni)
     }
+
+    fun nombreCompleto() = "$s_nombres $s_apellidos"
 
     override fun hashCode(): Int {
         return s_dni.hashCode()
@@ -251,6 +249,7 @@ data class CampanaNotificacion( @Id
                                 val id_campana_notif: Int = 0,
 
                                 @get:Min(1)
+                                @get:NotEmpty
                                 @Column(name = "id_campana")
                                 var id_campana:Int = 0,
 
@@ -308,7 +307,7 @@ data class PersonaCampana(  @Id
                             @Column(name = "s_dni")
                             var s_dni:String = Constantes.S_EMPTY,
 
-                            @get:Min(1)
+                            @get:Min(0)
                             @Column(name = "i_sesion")
                             var i_sesion:Int = 0,
 
@@ -396,9 +395,24 @@ data class Usuario(  @Id
         return (this.s_email == other.s_email)
     }
 
+    fun nombreCompleto() = "$s_nombres $s_apellidos"
+
     override fun hashCode(): Int {
         return s_email.hashCode()
     }
 }
 
-data class Ubigeo( var nombre:String,var codigo:String, var tipo:Int)
+data class VacunacionPorRecibir( var s_nombre:String = Constantes.S_EMPTY,
+                                 var s_fabricante:String = Constantes.S_EMPTY,
+                                 var d_fecha_proxima:Date?=null,
+                                 var qt_nro_dosis:Int = 0)
+
+data class PadronVacunacion(var s_dni_persona:String = Constantes.S_EMPTY,
+                            var s_nombre_persona:String = Constantes.S_EMPTY,
+                            var s_nombre_vacuna:String = Constantes.S_EMPTY,
+                            var s_fabricante:String = Constantes.S_EMPTY,
+                            var s_campana:String = Constantes.S_EMPTY,
+                            var s_medico:String = Constantes.S_EMPTY,
+                            var d_fecha_aplicacion:Date?=null,
+                            var qt_nro_dosis:Int = 0,
+                            var b_completo: Boolean)

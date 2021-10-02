@@ -25,12 +25,12 @@ class LocalVacunacionController(localVacunacionService: LocalVacunacionService):
 @RestController
 @RequestMapping("/api/campana")
 class CampanaController(campanaService: CampanaService):BasicController<Campana,Int>(campanaService)
-
+/*
 @CrossOrigin
 @RestController
 @RequestMapping("/api/campana_notificacion")
 class CampanaNotificacionController(campanaNotificacionService: CampanaNotificacionService):BasicController<CampanaNotificacion,Int>(campanaNotificacionService)
-
+*/
 @CrossOrigin
 @RestController
 @RequestMapping("/api/aplicacion_vacuna")//persona_campana
@@ -40,3 +40,18 @@ class PersonaCampanaController(personaCampanaService: PersonaCampanaService):Bas
 @RestController
 @RequestMapping("/api/usuario")//usuario
 class UsuarioController(usuarioService: UsuarioService):UserController<Usuario,String>(usuarioService)
+
+@CrossOrigin
+@RestController
+@RequestMapping("/api/campana_disponible")//campana_disponible
+class CampanaDisponibleController(campanaDisponibleService: CampanaDisponibleService):FindController<Campana,String>(campanaDisponibleService)
+
+@CrossOrigin
+@RestController
+@RequestMapping("/api/proxima_aplicacion")//proxima_aplicacion
+class ConsultaVacunacionController(consultaVacunacionService: ConsultaVacunacionService):FindController<VacunacionPorRecibir,String>(consultaVacunacionService)
+
+@CrossOrigin
+@RestController
+@RequestMapping("/api/padron_vacunacion")//padron_vacunacion
+class PadronVacunacionController(padronVacunacionService: PadronVacunacionService):FindController<PadronVacunacion,String>(padronVacunacionService)

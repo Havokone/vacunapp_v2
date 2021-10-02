@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiOperation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import pe.upc.vacunapp.service.BasicCrud
 import pe.upc.vacunapp.service.UserCrud
 import javax.validation.Valid
 

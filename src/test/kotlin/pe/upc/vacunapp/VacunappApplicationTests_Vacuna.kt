@@ -26,7 +26,7 @@ import java.util.*
 @RunWith(SpringRunner::class)
 @SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class VacunappApplicationTests {
+class VacunappApplicationTests_Vacuna {
 
 	@Autowired
 	private lateinit var webApplicationcontext: WebApplicationContext
@@ -54,7 +54,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun b_findById(){
+	fun b_findByIdVacuna(){
 		val vacunasFromService = vacunaService.findAll()
 		assert(vacunasFromService.isNotEmpty()){
 			"Should not be empty"
@@ -68,14 +68,14 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun c_finByIdEmpty(){
+	fun c_finByIdEmptyVacuna(){
 		mockMvc.perform( MockMvcRequestBuilders.get( "${vacunaEndPoint}/0" ) ).
 		andExpect( status().isNoContent ).
 		andExpect( MockMvcResultMatchers.jsonPath("$").doesNotExist() )
 	}
 
 	@Test
-	fun d_saveSuccessfully(){
+	fun d_saveSuccessfullyVacuna(){
 
 		val vacuna = Vacuna(s_nombre = "P42B",s_fabricante = "Pfizer",qt_dosis = 2,qt_dias = 25)
 
@@ -88,7 +88,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun d2_saveCheckRules(){
+	fun d2_saveCheckRulesVacuna(){
 
 		mockMvc.perform( MockMvcRequestBuilders.post(vacunaEndPoint).
 				content( mapper.writeValueAsBytes(Vacuna(s_nombre = "P42C",s_fabricante = "",qt_dosis = 0,qt_dias = 30)) ).
@@ -100,7 +100,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun e_saveDuplicateEntity(){
+	fun e_saveDuplicateEntityVacuna(){
 		val vacunasFromService = vacunaService.findAll()
 		assert(vacunasFromService.isNotEmpty()){
 			"Should not be empty"
@@ -115,7 +115,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun f_updateSuccessfully(){
+	fun f_updateSuccessfullyVacuna(){
 		val vacunasFromService = vacunaService.findAll()
 		assert(vacunasFromService.isNotEmpty()){
 			"Should not be empty"
@@ -130,7 +130,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun h_updateEntityNotFound(){
+	fun h_updateEntityNotFoundVacuna(){
 		val vacuna = Vacuna(id_vacuna = 1,s_nombre = "P42C",s_fabricante = "Sinopharm",qt_dosis = 1,qt_dias = 30)
 
 		mockMvc.perform( MockMvcRequestBuilders.put(vacunaEndPoint).
@@ -141,7 +141,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun i_deleteById(){
+	fun i_deleteByIdVacuna(){
 		val vacunasFromService = vacunaService.findAll()
 		assert(vacunasFromService.isNotEmpty()){
 			"Should not be empty"
@@ -155,7 +155,7 @@ class VacunappApplicationTests {
 	}
 
 	@Test
-	fun j_deleteByIdEntityNotFound(){
+	fun j_deleteByIdEntityNotFoundVacuna(){
 
 		mockMvc.perform( MockMvcRequestBuilders.delete("$vacunaEndPoint/0") ).
 				andExpect(status().isConflict).
