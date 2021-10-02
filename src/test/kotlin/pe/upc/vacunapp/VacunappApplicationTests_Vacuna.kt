@@ -68,7 +68,7 @@ class VacunappApplicationTests_Vacuna {
 	}
 
 	@Test
-	fun c_finByIdEmptyVacuna(){
+	fun c_findByIdEmptyVacuna(){
 		mockMvc.perform( MockMvcRequestBuilders.get( "${vacunaEndPoint}/0" ) ).
 		andExpect( status().isNoContent ).
 		andExpect( MockMvcResultMatchers.jsonPath("$").doesNotExist() )
